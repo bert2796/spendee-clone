@@ -1,0 +1,102 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "**/*"
+  ],
+  "plugins": [
+    "@nx",
+    "@typescript-eslint/eslint-plugin",
+    "simple-import-sort",
+    "sort-keys-fix"
+  ],
+  "extends": [
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.js",
+        "*.jsx"
+      ],
+      "rules": {
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": [
+                  "*"
+                ]
+              }
+            ]
+          }
+        ],
+        "simple-import-sort/exports": "error",
+        "simple-import-sort/imports": "error",
+        "sort-keys-fix/sort-keys-fix": "error"
+      }
+    },
+    {
+      "files": [
+        "*.jsx",
+        "*.tsx"
+      ],
+      "rules": {
+        "simple-import-sort/imports": ["error", {
+          "groups": [
+            ["^react", "^@?\\w"],
+            ["^(@|components)(/.*|$)"],
+            ["\\u0000"]
+          ]
+        }],
+        "react/jsx-sort-props": [
+          "error",
+          {
+
+            "callbacksLast": true,
+            "ignoreCase": false,
+            "shorthandFirst": true,
+            "reservedFirst": true
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "extends": [
+        "plugin:@nx/typescript"
+      ],
+      "rules": {}
+    },
+    {
+      "files": [
+        "*.js",
+        "*.jsx"
+      ],
+      "extends": [
+        "plugin:@nx/javascript"
+      ],
+      "rules": {}
+    },
+    {
+      "files": [
+        "*.spec.ts",
+        "*.spec.tsx",
+        "*.spec.js",
+        "*.spec.jsx"
+      ],
+      "env": {
+        "jest": true
+      },
+      "rules": {}
+    }
+  ]
+}
