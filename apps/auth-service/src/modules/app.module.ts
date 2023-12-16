@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthModule } from "./auth/auth.module";
+import { CategoryModule } from "./category/category.module";
 import { ConfigModule } from "./config/config.module";
 import { ConfigService } from "./config/config.service";
 import { HealthModule } from "./health/health.module";
@@ -20,6 +21,7 @@ import { WalletModule } from "./wallet/wallet.module";
     ConfigModule,
     HealthModule,
     UserModule,
+    CategoryModule,
     WalletModule
   ],
 })

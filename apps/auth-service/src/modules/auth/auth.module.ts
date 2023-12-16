@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { JwtModule } from "@nestjs/jwt";
 
+import { CategoryModule } from "../category/category.module";
 import { ConfigModule } from "../config/config.module";
 import { ConfigService } from "../config/config.service";
 import { UserModule } from "../user/user.module";
@@ -18,7 +19,8 @@ import { AuthService } from "./auth.service";
       useFactory: (configService: ConfigService) => configService.getJwtConfig(),
     }),
     UserModule,
-    WalletModule
+    WalletModule,
+    CategoryModule,
   ],
   providers: [AuthService]
 })

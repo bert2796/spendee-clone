@@ -3,6 +3,7 @@ import { JwtService } from "@nestjs/jwt";
 import { RpcException } from "@nestjs/microservices";
 import { LoginAuthDto, RegisterAuthDto } from "@spendee-clone/common/dto";
 
+import { CategoryService } from "../category/category.service";
 import { UserEntity } from "../user/user.entity";
 import { UserService } from "../user/user.service";
 import { WalletService } from "../wallet/wallet.service";
@@ -14,6 +15,7 @@ export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
+    private readonly categoryService: CategoryService,
     private readonly walletService: WalletService
   ) {}
 
@@ -81,7 +83,10 @@ export class AuthService {
     }
 
     // notify wallet service to initialize wallet for user
-    this.walletService.initializeWallet(user.id);
+    this.walletService.initializeUserWallet(user.id);
+
+    // notify category service to initialize categories for user
+    this.categoryService.initializeUserCategories(user.id);
 
     const accessToken = await this.jwtService.signAsync({ id: user.id });
 
