@@ -3,23 +3,23 @@ import { LoginAuthDto, RegisterAuthDto } from "@spendee-clone/common/dto";
 
 import { AuthService } from "./auth.service";
 
-@Controller()
+@Controller('auth')
 export class AuthController {
   constructor(
     private readonly authService: AuthService
   ) {}
 
-  @Get('/auth/health')
+  @Get('/health')
   healthCheck() {
     return this.authService.healthCheck();
   }
 
-  @Post('/auth/login')
+  @Post('/login')
   async login(@Body() loginAuthDto: LoginAuthDto) {
     return this.authService.login(loginAuthDto);
   }
 
-  @Post('/auth/register')
+  @Post('/register')
   async register(@Body() registerAuthDto: RegisterAuthDto) {
     return this.authService.register(registerAuthDto);
   }
