@@ -38,6 +38,30 @@
         }
       }
     },
+    "typeorm": {
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "command": "typeorm-ts-node-commonjs",
+        "cwd": "apps/category-service"
+      }
+    },
+    "typeorm-migration-generate": {
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "command": "nx run category-service:typeorm -d src/dataSource.ts migration:generate src/database/migrations/{args.name}",
+        "cwd": "apps/category-service"
+      }
+    },
+    "typeorm-migration-run": {
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "command": "nx run category-service:typeorm -d src/dataSource.ts migration:run",
+        "cwd": "apps/category-service"
+      }
+    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
