@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@spendee-clone/common/dto": ["libs/common/dto/src/index.ts"],
+      "@spendee-clone/common/types": ["libs/common/types/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
