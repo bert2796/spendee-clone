@@ -38,6 +38,38 @@
         }
       }
     },
+    "typeorm": {
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "command": "typeorm-ts-node-commonjs",
+        "cwd": "apps/wallet-service"
+      }
+    },
+    "typeorm-migration-generate": {
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "command": "nx run wallet-service:typeorm -d src/dataSource.ts migration:generate src/database/migrations/{args.name}",
+        "cwd": "apps/wallet-service"
+      }
+    },
+    "typeorm-migration-run": {
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "command": "nx run wallet-service:typeorm -d src/dataSource.ts migration:run",
+        "cwd": "apps/wallet-service"
+      }
+    },
+    "seeders-run": {
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "command": "ts-node -r tsconfig-paths/register src/database/seeders/index.ts",
+        "cwd": "apps/wallet-service"
+      }
+    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
