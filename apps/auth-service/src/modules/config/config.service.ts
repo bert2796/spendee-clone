@@ -23,6 +23,9 @@ export class ConfigService {
       // GENERAL
       PORT: joi.number().default(3000),
 
+      WALLET_SERVICE_HOST: joi.string().required(),
+      WALLET_SERVICE_PORT: joi.number().required(),
+
       // DB
       PG_HOST: joi.string().required(),
       PG_PORT: joi.number().required(),

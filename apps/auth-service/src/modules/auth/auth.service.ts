@@ -5,6 +5,7 @@ import { LoginAuthDto, RegisterAuthDto } from "@spendee-clone/common/dto";
 
 import { UserEntity } from "../user/user.entity";
 import { UserService } from "../user/user.service";
+import { WalletService } from "../wallet/wallet.service";
 
 @Injectable()
 export class AuthService {
@@ -13,6 +14,7 @@ export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
+    private readonly walletService: WalletService
   ) {}
 
   async validateCredentials(loginAuthDto: LoginAuthDto) {
@@ -77,6 +79,9 @@ export class AuthService {
 
       throw error;
     }
+
+    // notify wallet service to initialize wallet for user
+    this.walletService.initializeWallet(user.id);
 
     const accessToken = await this.jwtService.signAsync({ id: user.id });
 
