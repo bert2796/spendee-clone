@@ -7,7 +7,7 @@ export class WalletService {
     @Inject('WALLET_SERVICE') private readonly walletServiceClient: ClientProxy
   ) {}
 
-  async initializeWallet(userId: number) {
+  async initializeUserWallet(userId: number) {
     return this.walletServiceClient.emit('user-created', { userId });
   }
 }

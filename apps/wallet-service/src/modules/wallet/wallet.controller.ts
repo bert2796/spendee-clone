@@ -1,5 +1,6 @@
 import { Controller } from "@nestjs/common";
 import { EventPattern, MessagePattern } from "@nestjs/microservices";
+import { GetUserWalletsDto, InitializeUserWalletDto } from "@spendee-clone/common/dto";
 
 import { WalletService } from "./wallet.service";
 
@@ -10,12 +11,13 @@ export class WalletController {
   ) {}
 
   @EventPattern('user-created')
-  async initializeWallet(data: { userId: number }) {
-    return this.walletService.initializeUserWallet(data.userId);
+  async initializeUserWallet(initializedUserWalletDto: InitializeUserWalletDto) {
+    return this.walletService.initializeUserWallet(initializedUserWalletDto);
   }
 
   @MessagePattern({ cmd: 'get-user-wallets', role: 'wallet' })
-  async getWallets(data: { userId: number }) {
-    return this.walletService.find({ userId: data.userId });
+  async getUserWallets(getUserWalletsDto: GetUserWalletsDto) {
+    const { userId } = getUserWalletsDto;
+    return this.walletService.find({ userId });
   }
 }

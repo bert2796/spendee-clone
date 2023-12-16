@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { RpcException } from "@nestjs/microservices";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateWalletDto } from "@spendee-clone/common/dto";
+import { CreateWalletDto, InitializeUserWalletDto } from "@spendee-clone/common/dto";
 import { FindOptionsWhere, Repository } from "typeorm";
 
 import { CurrencyService } from "../currency/currency.service";
@@ -47,7 +47,8 @@ export class WalletService {
     return this.walletRepository.save(wallet);
   }
 
-  async initializeUserWallet(userId: number) {
+  async initializeUserWallet(initializedUserWalletDto: InitializeUserWalletDto) {
+    const { userId } = initializedUserWalletDto;
     return this.create({ currencyId: this.defaultCurrencyId, userId });
   }
 }
