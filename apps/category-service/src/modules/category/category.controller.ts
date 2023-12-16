@@ -1,6 +1,6 @@
 import { Controller } from "@nestjs/common";
 import { EventPattern, MessagePattern } from "@nestjs/microservices";
-import { GetUserCategoriesDto, InitializeUserCategoriesDto } from "@spendee-clone/common/dto";
+import { CreateCategoryDto, DeleteCategoryDto, GetUserCategoriesDto, InitializeUserCategoriesDto,UpdateCategoryDto } from "@spendee-clone/common/dto";
 
 import { CategoryService } from "./category.service";
 
@@ -20,5 +20,20 @@ export class CategoryController {
     const { userId } = getUserCategoriesDto;
 
     return this.categoryService.find({ userId });
+  }
+
+  @MessagePattern({ cmd: 'create-category', role: 'category' })
+  async create(createCategoryDto: CreateCategoryDto) {
+    return this.categoryService.create(createCategoryDto);
+  }
+
+  @MessagePattern({ cmd: 'update-category', role: 'category' })
+  async update(updateCategoryDto: UpdateCategoryDto) {
+    return this.categoryService.update(updateCategoryDto);
+  }
+
+  @MessagePattern({ cmd: 'delete-category', role: 'category' })
+  async delete(deleteCategoryDto: DeleteCategoryDto) {
+    return this.categoryService.delete(deleteCategoryDto);
   }
 }

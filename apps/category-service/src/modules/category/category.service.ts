@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { RpcException } from "@nestjs/microservices";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateCategoryDto, InitializeUserCategoriesDto } from "@spendee-clone/common/dto";
+import { CreateCategoryDto, DeleteCategoryDto, InitializeUserCategoriesDto, UpdateCategoryDto } from "@spendee-clone/common/dto";
 import { CategoryTypes } from "@spendee-clone/common/types";
 import { FindOptionsWhere, Repository } from "typeorm";
 
@@ -19,11 +19,17 @@ export class CategoryService {
     });
   }
 
+  async findOne(where: FindOptionsWhere<CategoryEntity> | FindOptionsWhere<CategoryEntity>[]): Promise<CategoryEntity> {
+    return this.categoryRepository.findOne({
+      where
+    });
+  }
+
   async create(createCategoryDto: CreateCategoryDto): Promise<CategoryEntity> {
-    const existingCategory = await this.find({
+    const existingCategory = await this.findOne({
       ...createCategoryDto
     });
-    if (existingCategory.length) {
+    if (existingCategory) {
       throw new RpcException({
         code: HttpStatus.BAD_REQUEST,
         message: 'Category already exists.',
@@ -36,6 +42,47 @@ export class CategoryService {
     category.type = createCategoryDto.type;
 
     return this.categoryRepository.save(category);
+  }
+
+  async update(updateCategoryDto: UpdateCategoryDto): Promise<CategoryEntity> {
+    const category = await this.findOne({ id: updateCategoryDto.id, userId: updateCategoryDto.userId });
+    if (!category) {
+      throw new RpcException({
+        code: HttpStatus.BAD_REQUEST,
+        message: 'Category does not exist.',
+      });
+    }
+
+    if (category.name === updateCategoryDto.name) {
+      return category;
+    }
+
+    const categoryWithSameAttributes = await this.findOne({
+      ...updateCategoryDto,
+      type: category.type,
+    });
+    if (categoryWithSameAttributes) {
+      throw new RpcException({
+        code: HttpStatus.BAD_REQUEST,
+        message: 'Category already exists.',
+      });
+    }
+
+    category.name = updateCategoryDto.name;
+
+    return this.categoryRepository.save(category);
+  }
+
+  async delete(deleteCategoryDto: DeleteCategoryDto) {
+    const category = await this.findOne({ id: deleteCategoryDto.id, userId: deleteCategoryDto.userId });
+    if (!category) {
+      throw new RpcException({
+        code: HttpStatus.BAD_REQUEST,
+        message: 'Category does not exist.',
+      });
+    }
+
+    return this.categoryRepository.remove(category);
   }
 
   async initializeUserCategories(initializeUserCategoriesDto: InitializeUserCategoriesDto) {
