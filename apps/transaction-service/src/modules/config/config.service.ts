@@ -1,6 +1,9 @@
 import { Injectable, Logger } from "@nestjs/common";
+import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { config } from 'dotenv';
 import joi from 'joi';
+
+import { TransactionEntity } from "../transaction/transaction.entity";
 
 config();
 
@@ -15,7 +18,26 @@ export class ConfigService {
 
   private validateEnv(env: Record<string, string>): Record<string, string | number> {
     const configSchema = joi.object({
+      /* eslint-disable sort-keys-fix/sort-keys-fix */
+      // GENERAL
       PORT: joi.number().default(3000),
+
+      // MICROSERVICES
+      CATEGORY_SERVICE_HOST: joi.string().required(),
+      CATEGORY_SERVICE_PORT: joi.number().required(),
+
+      WALLET_SERVICE_HOST: joi.string().required(),
+      WALLET_SERVICE_PORT: joi.number().required(),
+
+      // DB
+      PG_HOST: joi.string().required(),
+      PG_PORT: joi.number().required(),
+      PG_DATABASE: joi.string().required(),
+      PG_USERNAME: joi.string().required(),
+      PG_PASSWORD: joi.string().required(),
+
+
+      /* eslint-enable sort-keys-fix/sort-keys-fix */
     });
 
     const { error, value } = configSchema.validate(env, { allowUnknown: true });
@@ -28,7 +50,23 @@ export class ConfigService {
     return value;
   }
 
-    get<T>(key: string): T {
+  get<T>(key: string): T {
     return this.config[key] as T;
+  }
+
+  getTypeOrmConfig(): TypeOrmModuleOptions {
+    return {
+      /* eslint-disable sort-keys-fix/sort-keys-fix */
+      type: 'postgres',
+      host: this.get<string>('PG_HOST'),
+      port: this.get<number>('PG_PORT'),
+      database: this.get<string>('PG_DATABASE'),
+      username: this.get<string>('PG_USERNAME'),
+      password: this.get<string>('PG_PASSWORD'),
+
+      entities: [TransactionEntity],
+      migrations: ['src/database/migrations/*.ts'],
+      /* eslint-enable sort-keys-fix/sort-keys-fix */
+    }
   }
 }
