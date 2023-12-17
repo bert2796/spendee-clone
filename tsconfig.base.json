@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@spendee-clone/common/dto": ["libs/common/dto/src/index.ts"],
-      "@spendee-clone/common/types": ["libs/common/types/src/index.ts"]
+      "@spendee-clone/common/types": ["libs/common/types/src/index.ts"],
+      "@spendee-clone/common/utils": ["libs/common/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

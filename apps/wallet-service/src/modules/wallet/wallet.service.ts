@@ -23,6 +23,12 @@ export class WalletService {
     });
   }
 
+  async findOne(where: FindOptionsWhere<WalletEntity> | FindOptionsWhere<WalletEntity>[]): Promise<WalletEntity | null> {
+    return this.walletRepository.findOne({
+      where
+    });
+  }
+
   async create(createWalletDto: CreateWalletDto): Promise<WalletEntity> {
     const currency = await this.currencyService.findOne({ id: createWalletDto.currencyId });
     if (!currency) {

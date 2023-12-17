@@ -1,6 +1,6 @@
 import { Controller } from "@nestjs/common";
 import { EventPattern, MessagePattern } from "@nestjs/microservices";
-import { GetUserWalletsDto, InitializeUserWalletDto } from "@spendee-clone/common/dto";
+import { GetUserWalletDto, GetUserWalletsDto, InitializeUserWalletDto } from "@spendee-clone/common/dto";
 
 import { WalletService } from "./wallet.service";
 
@@ -19,5 +19,11 @@ export class WalletController {
   async getUserWallets(getUserWalletsDto: GetUserWalletsDto) {
     const { userId } = getUserWalletsDto;
     return this.walletService.find({ userId });
+  }
+
+  @MessagePattern({ cmd: 'get-user-wallet', role: 'wallet' })
+  async getUserWallet(getUserWalletDto: GetUserWalletDto) {
+    const { userId, id } = getUserWalletDto;
+    return this.walletService.findOne({ id, userId });
   }
 }
