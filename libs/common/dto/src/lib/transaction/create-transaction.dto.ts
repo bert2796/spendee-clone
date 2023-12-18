@@ -1,9 +1,13 @@
-import { IsDateString, IsDecimal, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsBoolean, IsDateString, IsDecimal, IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateTransactionDto {
   @IsNotEmpty()
   @IsNumber()
   readonly userId!: number;
+
+  @IsNotEmpty()
+  @IsEmail()
+  readonly userEmail!: string;
 
   @IsNotEmpty()
   @IsNumber()
@@ -22,6 +26,10 @@ export class CreateTransactionDto {
   readonly date!: string;
 
   @IsString()
-  readonly note!: string;
+  @IsOptional()
+  readonly note?: string;
 
+  @IsBoolean()
+  @IsOptional()
+  readonly isConfirmed?: boolean;
 }

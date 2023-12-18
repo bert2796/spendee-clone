@@ -8,6 +8,7 @@ export * from './lib/category/get-user-categories.dto';
 export * from './lib/category/get-user-category.dto';
 export * from './lib/category/initialize-user-categories.dto'
 export * from './lib/category/update-category.dto';
+export * from './lib/email/send-new-entry.dto';
 export * from './lib/generic-filter.dto';
 export * from './lib/transaction/api-create-transaction.dto';
 export * from './lib/transaction/api-get-user-transactions.dto';
