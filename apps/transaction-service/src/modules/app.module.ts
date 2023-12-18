@@ -7,6 +7,7 @@ import { ConfigService } from "./config/config.service";
 import { HealthModule } from "./health/health.module";
 import { TransactionModule } from "./transaction/transaction.module";
 import { WalletModule } from "./wallet/wallet.module";
+import { NotificationModule } from "./notification/notification.module";
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { WalletModule } from "./wallet/wallet.module";
     HealthModule,
     CategoryModule,
     WalletModule,
+    NotificationModule,
     TransactionModule,
   ],
 })

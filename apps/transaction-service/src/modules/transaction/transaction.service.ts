@@ -7,6 +7,7 @@ import { FindOptionsWhere, Repository } from "typeorm";
 import { CategoryService } from "../category/category.service";
 import { WalletService } from "../wallet/wallet.service";
 import { TransactionEntity } from "./transaction.entity";
+import { NotificationService } from "../notification/notification.service";
 
 @Injectable()
 export class TransactionService {
@@ -15,6 +16,7 @@ export class TransactionService {
   constructor(
     @InjectRepository(TransactionEntity) private readonly transactionRepository: Repository<TransactionEntity>,
     private readonly categoryService: CategoryService,
+    private readonly notificationService: NotificationService,
     private readonly walletService: WalletService
   ) {}
 
@@ -59,7 +61,18 @@ export class TransactionService {
     transaction.date = createTransactionDto.date;
     transaction.note = createTransactionDto.note;
 
-    return this.transactionRepository.save(transaction);
+    const savedTransaction = this.transactionRepository.save(transaction);
+
+    this.notificationService.sendEmail({
+      email: createTransactionDto.userEmail,
+      amount: createTransactionDto.amount,
+      note: createTransactionDto.note,
+      category: category.name,
+      type: category.type,
+      date: createTransactionDto.date,
+    });
+
+    return savedTransaction;
   }
 
 }

@@ -15,5 +15,5 @@ export class GenericFilter {
 
   @IsEnum(SortOrders)
   @IsOptional()
-  readonly sortOrder?: SortOrders = SortOrders.DESC;
+  readonly sortOrder?: SortOrders;
 }

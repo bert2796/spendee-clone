@@ -37,7 +37,7 @@ export class TransactionController {
   async createCategory(@Req() req: { user: User }, @Body() createTransactionDto: APICreateTransactionDto) {
     return firstValueFrom(
       this.transactionServiceClient
-        .send<Transaction, CreateTransactionDto>({ cmd: 'create-transaction', role: 'transaction' }, { ...createTransactionDto, userId: req.user.id })
+        .send<Transaction, CreateTransactionDto>({ cmd: 'create-transaction', role: 'transaction' }, { ...createTransactionDto, userId: req.user.id, userEmail: req.user.email })
         .pipe(timeout(5000))
         .pipe(catchError((error) => throwError(() => new RpcException(error))))
     );

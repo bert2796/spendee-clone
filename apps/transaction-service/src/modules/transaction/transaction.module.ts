@@ -6,10 +6,11 @@ import { WalletModule } from "../wallet/wallet.module";
 import { TransactionController } from "./transaction.controller";
 import { TransactionEntity } from "./transaction.entity";
 import { TransactionService } from "./transaction.service";
+import { NotificationModule } from "../notification/notification.module";
 
 @Module({
   controllers: [TransactionController],
-  imports: [TypeOrmModule.forFeature([TransactionEntity]), CategoryModule, WalletModule],
+  imports: [TypeOrmModule.forFeature([TransactionEntity]), CategoryModule, NotificationModule, WalletModule],
   providers: [TransactionService]
 })
 export class TransactionModule {}

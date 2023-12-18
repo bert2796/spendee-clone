@@ -30,7 +30,8 @@ export class TransactionController {
       ...(getUserTransactionsDto?.orderBy && {orderBy: getUserTransactionsDto.orderBy }),
       ...(getUserTransactionsDto?.sortOrder && {sortOrder: getUserTransactionsDto.sortOrder })
     }
-    if (filter) {
+
+    if (filter?.page && filter?.pageSize) {
       return this.transactionService.findPaginated(where, filter);
     }
 

@@ -29,6 +29,9 @@ export class ConfigService {
       WALLET_SERVICE_HOST: joi.string().required(),
       WALLET_SERVICE_PORT: joi.number().required(),
 
+      NOTIFICATION_SERVICE_HOST: joi.string().required(),
+      NOTIFICATION_SERVICE_PORT: joi.number().required(),
+
       // DB
       PG_HOST: joi.string().required(),
       PG_PORT: joi.number().required(),
