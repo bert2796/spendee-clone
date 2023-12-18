@@ -12,11 +12,12 @@ export class MailerService {
       context: {
         amount: sendNewEntryDto.amount,
         category: sendNewEntryDto.category,
+        type: sendNewEntryDto.type,
         date: sendNewEntryDto.date,
         note: sendNewEntryDto.note,
       },
       subject: 'New Transaction Entry',
-      template: './new-entry',
+      template: './newEntry',
       to: sendNewEntryDto.email
     });
   }
