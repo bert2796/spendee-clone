@@ -1,4 +1,4 @@
-import { IsDateString, IsDecimal, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsBoolean, IsDateString, IsDecimal, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class APICreateTransactionDto {
   @IsNotEmpty()
@@ -20,4 +20,7 @@ export class APICreateTransactionDto {
   @IsString()
   readonly note!: string;
 
+  @IsBoolean()
+  @IsOptional()
+  readonly isConfirmed?: boolean;
 }

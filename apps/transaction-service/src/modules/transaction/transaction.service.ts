@@ -1,13 +1,14 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { HttpStatus, Injectable, Logger } from "@nestjs/common";
+import { RpcException } from "@nestjs/microservices";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateTransactionDto, GenericFilter } from "@spendee-clone/common/dto";
 import { convertToBigInt } from "@spendee-clone/common/utils";
 import { FindOptionsWhere, Repository } from "typeorm";
 
 import { CategoryService } from "../category/category.service";
+import { NotificationService } from "../notification/notification.service";
 import { WalletService } from "../wallet/wallet.service";
 import { TransactionEntity } from "./transaction.entity";
-import { NotificationService } from "../notification/notification.service";
 
 @Injectable()
 export class TransactionService {
@@ -41,6 +42,21 @@ export class TransactionService {
 
 
   async create(createTransactionDto: CreateTransactionDto) {
+    const existingTransaction = await this.transactionRepository.findOne({
+      where: {
+        amount: `${convertToBigInt(createTransactionDto.amount)}`,
+        categoryId: createTransactionDto.categoryId,
+        date: createTransactionDto.date,
+        note: createTransactionDto.note,
+        walletId: createTransactionDto.walletId,
+      }
+    });
+    if (!createTransactionDto.isConfirmed && existingTransaction) {
+      throw new RpcException({
+        code: HttpStatus.BAD_REQUEST,
+        message: 'Transaction already exists.',
+      });
+    }
 
     const wallet = await this.walletService.getUserWallet({
       id: createTransactionDto.walletId,
@@ -64,12 +80,12 @@ export class TransactionService {
     const savedTransaction = this.transactionRepository.save(transaction);
 
     this.notificationService.sendEmail({
-      email: createTransactionDto.userEmail,
       amount: createTransactionDto.amount,
-      note: createTransactionDto.note,
       category: category.name,
-      type: category.type,
       date: createTransactionDto.date,
+      email: createTransactionDto.userEmail,
+      note: createTransactionDto.note,
+      type: category.type,
     });
 
     return savedTransaction;
