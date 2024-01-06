@@ -13,6 +13,9 @@ export class WalletEntity {
   @ManyToOne(() => CurrencyEntity)
   currency: CurrencyEntity;
 
+  @Column({ length: 128 })
+  name: string;
+
   @CreateDateColumn()
   createdAt: Date;
 

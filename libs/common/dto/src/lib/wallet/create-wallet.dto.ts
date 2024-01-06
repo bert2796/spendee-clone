@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateWalletDto {
   @IsNotEmpty()
@@ -8,4 +8,8 @@ export class CreateWalletDto {
   @IsNotEmpty()
   @IsNumber()
   readonly currencyId!: number;
+
+  @IsNotEmpty()
+  @IsString()
+  readonly name!: string;
 }

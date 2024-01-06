@@ -49,12 +49,13 @@ export class WalletService {
     const wallet = new WalletEntity();
     wallet.userId = createWalletDto.userId;
     wallet.currency = currency;
+    wallet.name = createWalletDto.name;
 
     return this.walletRepository.save(wallet);
   }
 
   async initializeUserWallet(initializedUserWalletDto: InitializeUserWalletDto) {
     const { userId } = initializedUserWalletDto;
-    return this.create({ currencyId: this.defaultCurrencyId, userId });
+    return this.create({ currencyId: this.defaultCurrencyId, name: 'Cash Wallet', userId });
   }
 }
