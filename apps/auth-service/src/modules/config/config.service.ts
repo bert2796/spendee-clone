@@ -1,6 +1,6 @@
-import { Injectable, Logger } from "@nestjs/common";
-import { JwtModuleOptions } from "@nestjs/jwt";
-import { TypeOrmModuleOptions } from "@nestjs/typeorm";
+import { Injectable, Logger } from '@nestjs/common';
+import { JwtModuleOptions } from '@nestjs/jwt';
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { config } from 'dotenv';
 import joi from 'joi';
 
@@ -17,7 +17,9 @@ export class ConfigService {
     this.config = this.validateEnv(process.env);
   }
 
-  private validateEnv(env: Record<string, string>): Record<string, string | number> {
+  private validateEnv(
+    env: Record<string, string>,
+  ): Record<string, string | number> {
     const configSchema = joi.object({
       /* eslint-disable sort-keys-fix/sort-keys-fix */
       // GENERAL
@@ -64,8 +66,8 @@ export class ConfigService {
       signOptions: {
         expiresIn: this.get<string>('JWT_ACCESS_TOKEN_EXP'),
       },
-    }
-  };
+    };
+  }
 
   getTypeOrmConfig(): TypeOrmModuleOptions {
     return {
@@ -80,6 +82,6 @@ export class ConfigService {
       entities: [UserEntity],
       migrations: ['src/database/migrations/*.ts'],
       /* eslint-enable sort-keys-fix/sort-keys-fix */
-    }
+    };
   }
 }

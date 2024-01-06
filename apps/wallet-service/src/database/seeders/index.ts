@@ -11,7 +11,7 @@ import { CurrencyEntity } from '../../modules/currency/currency.entity';
     .insert()
     .into(CurrencyEntity)
     .values(
-      currencies.map(currency => ({
+      currencies.map((currency) => ({
         code: currency.code,
         name: currency.name,
         symbol: currency.symbolNative,
@@ -23,5 +23,3 @@ import { CurrencyEntity } from '../../modules/currency/currency.entity';
 
   process.exit(0);
 })();
-
-

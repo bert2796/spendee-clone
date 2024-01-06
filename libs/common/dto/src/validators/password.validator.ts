@@ -4,7 +4,7 @@ import {
   ValidationOptions,
   ValidatorConstraint,
   ValidatorConstraintInterface,
-} from "class-validator";
+} from 'class-validator';
 
 export class StringUtilities {
   /**
@@ -46,12 +46,12 @@ export class StringUtilities {
 
 export function IsPasswordValid(
   property: string,
-  validationOptions?: ValidationOptions
+  validationOptions?: ValidationOptions,
 ) {
   return function (object: NonNullable<unknown>, propertyName: string) {
     registerDecorator({
       constraints: [property],
-      name: "isLongerThan",
+      name: 'isLongerThan',
       options: validationOptions,
       propertyName: propertyName,
       target: object.constructor,
@@ -76,7 +76,7 @@ export function IsPasswordValid(
   };
 }
 
-@ValidatorConstraint({ async: false, name: "passwordValidation" })
+@ValidatorConstraint({ async: false, name: 'passwordValidation' })
 export class PasswordValidation implements ValidatorConstraintInterface {
   validate(value: string) {
     if (!value) {
@@ -97,18 +97,21 @@ export class PasswordValidation implements ValidatorConstraintInterface {
   defaultMessage(args: ValidationArguments) {
     const value = args.value;
     if (!value) {
-      return "";
+      return '';
     }
 
-    if (!StringUtilities.containsUpperCase(value)) return "Password must contain uppercase";
+    if (!StringUtilities.containsUpperCase(value))
+      return 'Password must contain uppercase';
 
-    if (!StringUtilities.containsLowerCase(value)) return "Password must contain lowercase";
+    if (!StringUtilities.containsLowerCase(value))
+      return 'Password must contain lowercase';
 
-    if (!StringUtilities.containsNumber(value)) return "Password must contain number";
+    if (!StringUtilities.containsNumber(value))
+      return 'Password must contain number';
 
     if (!StringUtilities.containsSpecialCharacter(value))
-    return "Password must contain special characters";
+      return 'Password must contain special characters';
 
-    return "";
+    return '';
   }
 }

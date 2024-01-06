@@ -21,10 +21,7 @@ export class AuthorizeGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const authorize = this.reflector.get(
-      'authorize',
-      context.getHandler(),
-    );
+    const authorize = this.reflector.get('authorize', context.getHandler());
     if (!authorize) {
       return true;
     }

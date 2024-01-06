@@ -1,14 +1,12 @@
-import { Controller } from "@nestjs/common";
-import { MessagePattern } from "@nestjs/microservices";
-import { LoginAuthDto, RegisterAuthDto } from "@spendee-clone/common/dto";
+import { Controller } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
+import { LoginAuthDto, RegisterAuthDto } from '@spendee-clone/common/dto';
 
-import { AuthService } from "./auth.service";
+import { AuthService } from './auth.service';
 
 @Controller()
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @MessagePattern({ cmd: 'validate-token', role: 'auth' })
   async validateToken(token: string) {

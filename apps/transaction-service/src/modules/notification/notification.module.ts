@@ -1,9 +1,9 @@
-import { Module } from "@nestjs/common";
-import { ClientsModule, Transport } from "@nestjs/microservices";
+import { Module } from '@nestjs/common';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
-import { ConfigModule } from "../config/config.module";
-import { ConfigService } from "../config/config.service";
-import { NotificationService } from "./notification.service";
+import { ConfigModule } from '../config/config.module';
+import { ConfigService } from '../config/config.service';
+import { NotificationService } from './notification.service';
 
 @Module({
   exports: [NotificationService],
@@ -18,7 +18,7 @@ import { NotificationService } from "./notification.service";
             host: configService.get<string>('NOTIFICATION_SERVICE_HOST'),
             port: configService.get<number>('NOTIFICATION_SERVICE_PORT'),
           },
-          transport: Transport.TCP
+          transport: Transport.TCP,
         }),
       },
     ]),

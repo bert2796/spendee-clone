@@ -4,4 +4,4 @@ export const isLessThanFiveMinutes = (date: Date): boolean => {
   const minutes = Math.floor(diff / 1000 / 60);
 
   return minutes < 5;
-}
+};

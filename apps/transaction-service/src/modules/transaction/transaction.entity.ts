@@ -1,4 +1,11 @@
-import {  Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  Index,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Index('IDX_TRANSACTION', ['userId', 'walletId', 'date', 'type'])
 @Entity({ name: 'transactions' })
@@ -26,7 +33,7 @@ export class TransactionEntity {
 
   // https://github.com/typeorm/typeorm/issues/2176
   @Index()
-  @Column({ type: 'date'})
+  @Column({ type: 'date' })
   date: string;
 
   @Column({ length: 255, nullable: true, type: 'varchar' })

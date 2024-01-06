@@ -1,9 +1,9 @@
-import { Module } from "@nestjs/common";
-import { ClientsModule, Transport } from "@nestjs/microservices";
+import { Module } from '@nestjs/common';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
-import { ConfigModule } from "../config/config.module";
-import { ConfigService } from "../config/config.service";
-import { WalletService } from "./wallet.service";
+import { ConfigModule } from '../config/config.module';
+import { ConfigService } from '../config/config.service';
+import { WalletService } from './wallet.service';
 
 @Module({
   exports: [WalletService],
@@ -18,7 +18,7 @@ import { WalletService } from "./wallet.service";
             host: configService.get<string>('WALLET_SERVICE_HOST'),
             port: configService.get<number>('WALLET_SERVICE_PORT'),
           },
-          transport: Transport.TCP
+          transport: Transport.TCP,
         }),
       },
     ]),

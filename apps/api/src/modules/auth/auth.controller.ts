@@ -1,13 +1,11 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
-import { LoginAuthDto, RegisterAuthDto } from "@spendee-clone/common/dto";
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { LoginAuthDto, RegisterAuthDto } from '@spendee-clone/common/dto';
 
-import { AuthService } from "./auth.service";
+import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Get('/health')
   healthCheck() {

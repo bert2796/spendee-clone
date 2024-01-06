@@ -1,12 +1,12 @@
-import { HttpStatus, Injectable, Logger } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
-import { RpcException } from "@nestjs/microservices";
-import { LoginAuthDto, RegisterAuthDto } from "@spendee-clone/common/dto";
+import { HttpStatus, Injectable, Logger } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { RpcException } from '@nestjs/microservices';
+import { LoginAuthDto, RegisterAuthDto } from '@spendee-clone/common/dto';
 
-import { CategoryService } from "../category/category.service";
-import { UserEntity } from "../user/user.entity";
-import { UserService } from "../user/user.service";
-import { WalletService } from "../wallet/wallet.service";
+import { CategoryService } from '../category/category.service';
+import { UserEntity } from '../user/user.entity';
+import { UserService } from '../user/user.service';
+import { WalletService } from '../wallet/wallet.service';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +16,7 @@ export class AuthService {
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
     private readonly categoryService: CategoryService,
-    private readonly walletService: WalletService
+    private readonly walletService: WalletService,
   ) {}
 
   async validateCredentials(loginAuthDto: LoginAuthDto) {

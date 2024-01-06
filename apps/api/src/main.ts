@@ -26,9 +26,7 @@ async function bootstrap() {
     }),
   );
 
-  app.useGlobalFilters(
-    new RpcToHttpExceptionFilter()
-  );
+  app.useGlobalFilters(new RpcToHttpExceptionFilter());
 
   await app.listen(port, () => {
     logger.log(`API Gateway listening at http://localhost:${port}/api`);

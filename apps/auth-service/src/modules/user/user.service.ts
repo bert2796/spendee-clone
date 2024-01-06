@@ -1,27 +1,32 @@
-import { HttpStatus, Injectable } from "@nestjs/common";
-import { RpcException } from "@nestjs/microservices";
-import { InjectRepository } from "@nestjs/typeorm";
-import { CreateUserDto } from "@spendee-clone/common/dto";
-import { FindOptionsWhere, Repository } from "typeorm";
+import { HttpStatus, Injectable } from '@nestjs/common';
+import { RpcException } from '@nestjs/microservices';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CreateUserDto } from '@spendee-clone/common/dto';
+import { FindOptionsWhere, Repository } from 'typeorm';
 
-import { UserEntity } from "./user.entity";
+import { UserEntity } from './user.entity';
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async findOneWithPassword(where: FindOptionsWhere<UserEntity> | FindOptionsWhere<UserEntity>[]): Promise<UserEntity> {
+  async findOneWithPassword(
+    where: FindOptionsWhere<UserEntity> | FindOptionsWhere<UserEntity>[],
+  ): Promise<UserEntity> {
     return this.userRepository.findOne({
       select: ['id', 'name', 'email', 'password'],
-      where
+      where,
     });
   }
 
-  async findOne(where: FindOptionsWhere<UserEntity> | FindOptionsWhere<UserEntity>[]): Promise<UserEntity> {
+  async findOne(
+    where: FindOptionsWhere<UserEntity> | FindOptionsWhere<UserEntity>[],
+  ): Promise<UserEntity> {
     return this.userRepository.findOne({
-      where
+      where,
     });
   }
 

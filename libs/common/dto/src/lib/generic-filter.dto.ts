@@ -1,5 +1,5 @@
-import { SortOrders } from "@spendee-clone/common/types";
-import { IsEnum,IsNumber, IsOptional } from "class-validator";
+import { SortOrders } from '@spendee-clone/common/types';
+import { IsEnum, IsNumber, IsOptional } from 'class-validator';
 
 export class GenericFilter {
   @IsOptional()

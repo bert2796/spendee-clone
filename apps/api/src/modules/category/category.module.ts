@@ -1,9 +1,9 @@
-import { Module } from "@nestjs/common";
-import { ClientsModule, Transport } from "@nestjs/microservices";
+import { Module } from '@nestjs/common';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
-import { ConfigModule } from "../config/config.module";
-import { ConfigService } from "../config/config.service";
-import { CategoryController } from "./category.controller";
+import { ConfigModule } from '../config/config.module';
+import { ConfigService } from '../config/config.service';
+import { CategoryController } from './category.controller';
 
 @Module({
   controllers: [CategoryController],
@@ -18,10 +18,10 @@ import { CategoryController } from "./category.controller";
             host: configService.get<string>('CATEGORY_SERVICE_HOST'),
             port: configService.get<number>('CATEGORY_SERVICE_PORT'),
           },
-          transport: Transport.TCP
+          transport: Transport.TCP,
         }),
       },
     ]),
-  ]
+  ],
 })
 export class CategoryModule {}

@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable, Logger } from '@nestjs/common';
 import { config } from 'dotenv';
 import joi from 'joi';
 
@@ -13,7 +13,9 @@ export class ConfigService {
     this.config = this.validateEnv(process.env);
   }
 
-  private validateEnv(env: Record<string, string>): Record<string, string | number> {
+  private validateEnv(
+    env: Record<string, string>,
+  ): Record<string, string | number> {
     const configSchema = joi.object({
       AUTH_SERVICE_HOST: joi.string().default('0.0.0.0'),
       AUTH_SERVICE_PORT: joi.number().default(3000),

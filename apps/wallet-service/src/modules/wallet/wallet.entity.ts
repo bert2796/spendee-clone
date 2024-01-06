@@ -1,6 +1,13 @@
-import {  Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
-import { CurrencyEntity } from "../currency/currency.entity";
+import { CurrencyEntity } from '../currency/currency.entity';
 
 @Entity({ name: 'wallets' })
 export class WalletEntity {

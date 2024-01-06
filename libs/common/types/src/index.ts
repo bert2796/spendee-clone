@@ -19,7 +19,7 @@ export type Currency = {
   name: string;
   symbol: string;
   code: string;
-}
+};
 
 export type Wallet = {
   id: number;
@@ -28,7 +28,7 @@ export type Wallet = {
   currency: Currency;
   createdAt: Date;
   updatedAt: Date;
-}
+};
 
 export type Category = {
   id: number;
@@ -37,7 +37,7 @@ export type Category = {
   type: CategoryTypes;
   createdAt: Date;
   updatedAt: Date;
-}
+};
 
 export type Transaction = {
   id: number;
@@ -50,4 +50,4 @@ export type Transaction = {
   note: string;
   createdAt: Date;
   updatedAt: Date;
-}
+};

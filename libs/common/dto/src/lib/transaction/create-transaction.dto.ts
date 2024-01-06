@@ -1,4 +1,13 @@
-import { IsBoolean, IsDateString, IsDecimal, IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsDateString,
+  IsDecimal,
+  IsEmail,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreateTransactionDto {
   @IsNotEmpty()

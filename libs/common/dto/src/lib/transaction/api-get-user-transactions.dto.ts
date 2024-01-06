@@ -1,7 +1,7 @@
-import { CategoryTypes } from "@spendee-clone/common/types";
-import { IsEnum, IsNumberString, IsOptional } from "class-validator";
+import { CategoryTypes } from '@spendee-clone/common/types';
+import { IsEnum, IsNumberString, IsOptional } from 'class-validator';
 
-import { GenericFilter } from "../generic-filter.dto";
+import { GenericFilter } from '../generic-filter.dto';
 
 export class APIGetUserTransactionsDto extends GenericFilter {
   @IsOptional()

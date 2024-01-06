@@ -1,5 +1,5 @@
-import { Injectable, Logger } from "@nestjs/common";
-import { TypeOrmModuleOptions } from "@nestjs/typeorm";
+import { Injectable, Logger } from '@nestjs/common';
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { config } from 'dotenv';
 import joi from 'joi';
 
@@ -16,7 +16,9 @@ export class ConfigService {
     this.config = this.validateEnv(process.env);
   }
 
-  private validateEnv(env: Record<string, string>): Record<string, string | number> {
+  private validateEnv(
+    env: Record<string, string>,
+  ): Record<string, string | number> {
     const configSchema = joi.object({
       /* eslint-disable sort-keys-fix/sort-keys-fix */
       // GENERAL
@@ -59,6 +61,6 @@ export class ConfigService {
       entities: [CategoryEntity],
       migrations: ['src/database/migrations/*.ts'],
       /* eslint-enable sort-keys-fix/sort-keys-fix */
-    }
+    };
   }
 }

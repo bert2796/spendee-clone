@@ -1,17 +1,21 @@
-import { Controller } from "@nestjs/common";
-import { EventPattern, MessagePattern } from "@nestjs/microservices";
-import { GetUserWalletDto, GetUserWalletsDto, InitializeUserWalletDto } from "@spendee-clone/common/dto";
+import { Controller } from '@nestjs/common';
+import { EventPattern, MessagePattern } from '@nestjs/microservices';
+import {
+  GetUserWalletDto,
+  GetUserWalletsDto,
+  InitializeUserWalletDto,
+} from '@spendee-clone/common/dto';
 
-import { WalletService } from "./wallet.service";
+import { WalletService } from './wallet.service';
 
 @Controller()
 export class WalletController {
-  constructor(
-    private readonly walletService: WalletService
-  ) {}
+  constructor(private readonly walletService: WalletService) {}
 
   @EventPattern('user-created')
-  async initializeUserWallet(initializedUserWalletDto: InitializeUserWalletDto) {
+  async initializeUserWallet(
+    initializedUserWalletDto: InitializeUserWalletDto,
+  ) {
     return this.walletService.initializeUserWallet(initializedUserWalletDto);
   }
 

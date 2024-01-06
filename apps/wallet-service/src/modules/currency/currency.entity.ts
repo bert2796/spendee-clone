@@ -1,4 +1,4 @@
-import {  Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'currencies' })
 export class CurrencyEntity {
@@ -12,5 +12,5 @@ export class CurrencyEntity {
   code: string;
 
   @Column({ length: 10 })
-  symbol: string
+  symbol: string;
 }

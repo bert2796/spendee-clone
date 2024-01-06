@@ -1,7 +1,13 @@
-import { CategoryTypes } from "@spendee-clone/common/types";
-import { IsEnum, IsNotEmpty, IsNumber, IsNumberString, IsOptional } from "class-validator";
+import { CategoryTypes } from '@spendee-clone/common/types';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsNumberString,
+  IsOptional,
+} from 'class-validator';
 
-import { GenericFilter } from "../generic-filter.dto";
+import { GenericFilter } from '../generic-filter.dto';
 
 export class GetUserTransactionsDto extends GenericFilter {
   @IsNotEmpty()

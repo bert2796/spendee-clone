@@ -1,4 +1,11 @@
-import { IsEmail, IsNotEmpty, IsString, MaxLength, MinLength, Validate } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsString,
+  MaxLength,
+  MinLength,
+  Validate,
+} from 'class-validator';
 
 import { PasswordValidation } from '../../validators/password.validator';
 

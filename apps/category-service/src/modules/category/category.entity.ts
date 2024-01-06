@@ -1,4 +1,11 @@
-import {  Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  Unique,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Unique('UQ_CATEGORY', ['userId', 'name', 'type'])
 @Entity({ name: 'categories' })
